@@ -102,3 +102,7 @@ venv.bak/
 
 # mypy
 .mypy_cache/
+
+# IDEs, etc
+.idea/
+*.code-workspace
