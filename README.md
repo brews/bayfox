@@ -29,9 +29,9 @@ The values we're using for priors are roughly based on the range of SSTs we've s
 core in the modern period, though prior standard deviation is twice`d18osw` is twice the spread we see in the modern 
 record. δ18O for seawater (‰; VSMOW) during the modern record 
 ([LeGrande and Schmidt 2006](https://doi.org/10.1029/2006GL026011)). We'll assume it's constant -- for simplicity. 
-We're not correcting these proxies for changes in global ice volume, so these numbers will be off. Ideally we'd make 
+We're also not correcting these proxies for changes in global ice volume, so these numbers will be off. Ideally we'd make 
 this correction to δ18Oc series before the prediction. See the 
-[`erebusfall` package](https://github.com/brews/erebusfall) for simple of ice-volume correction in Python.
+[`erebusfall` package](https://github.com/brews/erebusfall) for simple ice-volume correction in Python.
 
 To see actual numbers from the prediction, directly parse `prediction.ensemble` or use `prediction.percentile()` to get 
 the 5%, 50% and 95% percentiles. You can also plot your prediction with `dfox.predictplot(prediction)`.
@@ -53,12 +53,12 @@ You can also predict δ18O for planktic calcite using similar options, using the
 
 ## Installation
 
-To install **deloxfox** with **pip**, run:
+To install **deloxfox** with *pip*, run:
 
 
     pip install git+git://github.com/brews/deloxfox.git@master
     
-To install **deloxfox** with **conda**, run:
+To install **deloxfox** with *conda*, run:
 
 
     conda install -c sbmalev deloxfox
