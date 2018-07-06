@@ -1,13 +1,16 @@
 import matplotlib.pylab as plt
 
 
-def predictplot(prediction, ylabel=None, x=None, xlabel=None, ax=None):
+def predictplot(prediction, q=None, ylabel=None, x=None, xlabel=None, ax=None):
     """Simple plot of prediction with 90% interval.
 
     Parameters
     ----------
     prediction : Prediction
         MCMC prediciton to be plotted.
+    q : sequence or None, optional
+        Sequence of percentiles (low, med, high) to plot. Default uses default
+        values of ``prediction.percentile()``.
     ylabel : str or None, optional
         y-axis label.
     x : array-like, optional
@@ -28,7 +31,11 @@ def predictplot(prediction, ylabel=None, x=None, xlabel=None, ax=None):
     if x is None:
         x = list(range(len(prediction.ensemble)))
 
-    perc = prediction.percentile(q=[5, 50, 95])
+    q = list(q)
+    q.sort()
+    assert len(q) == 3, '`q` requires three numbers.'
+
+    perc = prediction.percentile(q=q)
 
     ax.fill_between(x, perc[:, 0], perc[:, 2], alpha=0.25,
                     label='90% uncertainty', color='C0')
