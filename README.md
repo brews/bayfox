@@ -17,25 +17,34 @@ First, load key packages and an example dataset:
     d = np.genfromtxt(example_file, delimiter=',', names=True, missing_values='NA')
 
 This data (from [Koutavas and Joanides 2012](https://doi.org/10.1029/2012PA002378))
-has three columns giving, down-core depth, sediment age (calendar years BP) and δ18O for *G. ruber* (white) (‰; VPDB). The core site is in the Eastern Equatorial Pacific.
+has three columns giving, down-core depth, sediment age (calendar years BP) and δ18O for *G. ruber* (white) (‰; VPDB). 
+The core site is in the Eastern Equatorial Pacific.
 
 We can make a prediction of sea-surface temperature (SST) with `predict_seatemp()`:
 
 
-    prediction = dfox.predict_seatemp(d['d18O_ruber'], d18osw=0.24, prior_mean=25.1, prior_std=8.0)
+    prediction = dfox.predict_seatemp(d['d18O_ruber'], d18osw=0.239, prior_mean=24.9, prior_std=7.81)
 
-`d18osw` is the δ18O for seawater (‰; VSMOW) during the modern record ([LeGrande and Schmidt 2006](https://doi.org/10.1029/2006GL026011)). We'll assume it's constand for simplicity.
+The values we're using for priors are roughly based on the range of SSTs we've seen for *G. ruber* (white) sediment 
+core in the modern period, though prior standard deviation is twice`d18osw` is twice the spread we see in the modern 
+record. δ18O for seawater (‰; VSMOW) during the modern record 
+([LeGrande and Schmidt 2006](https://doi.org/10.1029/2006GL026011)). We'll assume it's constant -- for simplicity. 
+We're not correcting these proxies for changes in global ice volume, so these numbers will be off. Ideally we'd make 
+this correction to δ18Oc series before the prediction. See the 
+[`erebusfall` package](https://github.com/brews/erebusfall) for simple of ice-volume correction in Python.
 
-To see actual numbers from the prediction, directly parse `prediction.ensemble` or use `prediction.percentile()` to get the 5%, 50% and 95% percentiles. You can also plot your prediction with `dfox.predictplot(prediction)`.
+To see actual numbers from the prediction, directly parse `prediction.ensemble` or use `prediction.percentile()` to get 
+the 5%, 50% and 95% percentiles. You can also plot your prediction with `dfox.predictplot(prediction)`.
 
-This uses the pooled Bayesian calibration model, which is calibrated on annual SSTs. We can consider foram-specific variability with:
+This uses the pooled Bayesian calibration model, which is calibrated on annual SSTs. We can consider foram-specific 
+variability with:
 
-    prediction = dfox.predict_seatemp(d['d18O_ruber'], d18osw=0.24, prior_mean=25.1, prior_std=8.0, 
+    prediction = dfox.predict_seatemp(d['d18O_ruber'], d18osw=0.239, prior_mean=24.9, prior_std=7.81, 
                                       foram='G_ruber_white')
 
 which uses our hierarchical model calibrated on annual SSTs. We can also estimate foram-specific seasonal effects with:
 
-    prediction = dfox.predict_seatemp(d['d18O_ruber'], d18osw=0.24, prior_mean=25.1, prior_std=8.0, 
+    prediction = dfox.predict_seatemp(d['d18O_ruber'], d18osw=0.239, prior_mean=24.9, prior_std=7.81, 
                                       foram='G_ruber_white', seasonal_seatemp=True)
 
 This uses our hierarchical model calibrated on seasonal SSTs. Be sure to specify the foraminifera if you use this option.
