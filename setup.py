@@ -37,5 +37,5 @@ setup(
 
     install_requires=['numpy', 'matplotlib', 'attrs'],
     tests_require=['pytest'],
-    package_data={'deltaoxfox': ['modelparams/*.csv', 'example_data/*.csv']}
+    package_data={'deloxfox': ['modelparams/*.csv', 'example_data/*.csv']}
 )
