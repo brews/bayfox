@@ -103,6 +103,6 @@ class DrawDispenser:
 
 
 # Preloading these resources so only need to load them once.
-get_draws = DrawDispenser(pooled_annual=PooledTrace(get_csv_resource('/modelparams/annual_pooled_trace.csv')),
-                          hier_annual=HierTrace(get_csv_resource('/modelparams/annual_hierarchical_trace.csv')),
-                          hier_seasonal=HierTrace(get_csv_resource('/modelparams/seasonal_hierarchical_trace.csv')))
+get_draws = DrawDispenser(pooled_annual=PooledTrace(get_csv_resource('/modelparams/tracedumps/annual_pooled_trace.csv')),
+                          hier_annual=HierTrace(get_csv_resource('/modelparams/tracedumps/annual_hierarchical_trace.csv')),
+                          hier_seasonal=HierTrace(get_csv_resource('/modelparams/tracedumps/seasonal_hierarchical_trace.csv')))

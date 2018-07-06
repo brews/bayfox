@@ -31,11 +31,11 @@ setup(
         # that you indicate whether you support Python 2, Python 3 or both.
         'Programming Language :: Python :: 3',
     ],
-    keywords='marine paleoclimate paleoceanography d18O',
+    keywords='marine paleoclimate paleoceanography d18o δ18o',
 
     packages=find_packages(exclude=['docs']),
 
     install_requires=['numpy', 'matplotlib', 'attrs'],
     tests_require=['pytest'],
-    package_data={'deloxfox': ['modelparams/*.csv', 'example_data/*.csv']}
+    package_data={'deloxfox': ['modelparams/tracedumps/*.csv', 'example_data/*.csv']}
 )
