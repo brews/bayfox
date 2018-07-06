@@ -22,7 +22,6 @@ The core site is in the Eastern Equatorial Pacific.
 
 We can make a prediction of sea-surface temperature (SST) with `predict_seatemp()`:
 
-
     prediction = dfox.predict_seatemp(d['d18O_ruber'], d18osw=0.239, prior_mean=24.9, prior_std=7.81)
 
 The values we're using for priors are roughly based on the range of SSTs we've seen for *G. ruber* (white) sediment 
@@ -56,7 +55,7 @@ You can also predict δ18O for planktic calcite using similar options, using the
 To install **deloxfox** with *pip*, run:
 
 
-    pip install git+git://github.com/brews/deloxfox.git@master
+    pip install deloxfox
     
 To install **deloxfox** with *conda*, run:
 
