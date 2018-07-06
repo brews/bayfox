@@ -1,2 +1,3 @@
 # deloxfox
-Experimental Bayesian planktic foraminifera calibration
+
+Experimental Bayesian planktic foraminifera calibration, for Python.
