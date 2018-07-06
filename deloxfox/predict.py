@@ -168,13 +168,14 @@ def _target_timeseries_pred(d18osw_now, alpha_now, beta_now, tau_now, proxy_ts,
 
     # Inverse posterior covariance matrix
     precision = tau_now ** -2
-    inv_post_cov = prior_inv_cov + beta_now ** 2 * precision * np.eye(n_ts)
+    post_inv_cov = prior_inv_cov + precision * beta_now ** 2 * np.eye(n_ts)
 
-    post_cov = np.linalg.inv(inv_post_cov)
+    post_cov = np.linalg.inv(post_inv_cov)
     # Get first factor for the mean
     mean_first_factor = prior_inv_cov @ prior_mu + precision * beta_now * (proxy_ts - alpha_now - d18osw_now)
-    mean_full = post_cov @ mean_first_factor
+    mean_full = mean_first_factor @ post_cov
 
-    timeseries_pred = mean_full + np.sqrt(post_cov.diagonal()) * np.random.randn(n_ts)
+    timeseries_pred = np.random.normal(loc=mean_full,
+                                       scale=np.sqrt(post_cov.diagonal()))
 
     return timeseries_pred
