@@ -13,10 +13,6 @@ matrix:
       env:
         - CONDA_ENV=py36
         - JOB_OS=Linux
-    -python: 3.7
-      env:
-        - CONDA_ENV=py37
-        - JOB_OS=Linux
     - os: osx
       language: generic
 #      python: 3.5
