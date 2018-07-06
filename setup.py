@@ -1,9 +1,14 @@
 from setuptools import setup, find_packages
 
+def readme():
+    with open('README.md') as f:
+        return f.read()
+
 setup(
     name='deloxfox',
     version='0.0.1a0',
     description='Experimental Bayesian planktic foraminifera calibration, for Python.',
+    long_description=readme(),
     license='GPLv3',
 
     author='S. Brewster Malevich',
@@ -31,5 +36,5 @@ setup(
 
     install_requires=['numpy', 'matplotlib', 'attrs'],
     tests_require=['pytest'],
-    package_data={'deltaoxfox': ['modelparams/*.csv']}
+    package_data={'deltaoxfox': ['modelparams/*.csv', 'example_data/*.csv']}
 )
