@@ -42,14 +42,14 @@ def predict_d18oc(seatemp, d18osw, foram=None, seasonal_seatemp=False,
     Parameters
     ----------
     seatemp : array_like or scalar
-        Sea-surface temperature (°C).
+        n-length array or scalar of sea-surface temperature (°C).
     d18osw : array_like or scalar
-        δ18O of seawater (‰; VSMOW). If not scalar, must be the same length as
-        ``seatemp``.
+        n-length array or scalar of δ18O of seawater (‰; VSMOW). If not scalar,
+        must be the same length as ``seatemp``.
     foram : str, optional
         Foraminifera group name of ``d18oc`` sample. Can be 'G_ruber_pink',
         'G_ruber_white', 'G_sacculifer', 'N_pachyderma_sinistral',
-        'G_bulloides', 'N_pachyderma_dextral' or ``None``. If ``None, pooled
+        'G_bulloides', 'N_pachyderma_dextral' or ``None``. If ``None``, pooled
         calibration model is used.
     seasonal_seatemp : bool, optional
         Indicates whether sea-surface temperature is annual or seasonal
@@ -60,12 +60,13 @@ def predict_d18oc(seatemp, d18osw, foram=None, seasonal_seatemp=False,
 
     Returns
     -------
-    prediciton : Prediciton
+    prediction : Prediction
         Model prediction estimating δ18O of planktic foraminiferal calcite
         (‰; VPDB).
     """
     seatemp = np.asanyarray(seatemp)
     d18osw = np.asanyarray(d18osw)
+    seasonal_seatemp = bool(seasonal_seatemp)
 
     alpha, beta, tau = drawsfun(foram=foram, seasonal_seatemp=seasonal_seatemp)
 
@@ -74,6 +75,7 @@ def predict_d18oc(seatemp, d18osw, foram=None, seasonal_seatemp=False,
     # Unit adjustment.
     d18osw_adj = d18osw - 0.27
 
+    # TODO(brews): Might be able to vectorize loop below.
     y = np.empty((len(seatemp), n_draws))
     y[:] = np.nan
     for i in range(n_draws):
@@ -90,9 +92,10 @@ def predict_seatemp(d18oc, d18osw, prior_mean, prior_std, foram=None,
     Parameters
     ----------
     d18oc : array_like or scalar
-        δ18O of planktic foraminiferal calcite (‰; VPDB).
+        n-length array or scalar of δ18O of planktic foraminiferal calcite
+        (‰; VPDB).
     d18osw : array_like or scalar
-        δ18O of seawater (‰; VSMOW). If not scalar, must be the same length as
+        n-length array or scalar of δ18O of seawater (‰; VSMOW). If not scalar, must be the same length as
         ``d18oc``.
     prior_mean : scalar
         Prior mean of sea-surface temperature (°C).
@@ -112,11 +115,12 @@ def predict_seatemp(d18oc, d18osw, prior_mean, prior_std, foram=None,
 
     Returns
     -------
-    prediciton : Prediciton
+    prediction : Prediction
         Model prediction giving estimated sea-surface temperature (°C).
     """
     d18oc = np.asanyarray(d18oc)
     d18osw = np.asanyarray(d18osw)
+    seasonal_seatemp = bool(seasonal_seatemp)
 
     alpha, beta, tau = drawsfun(foram=foram, seasonal_seatemp=seasonal_seatemp)
 
@@ -129,6 +133,7 @@ def predict_seatemp(d18oc, d18osw, prior_mean, prior_std, foram=None,
     pmu = np.ones(nd) * prior_mean
     pinv_cov = np.eye(nd) * prior_std ** -2
 
+    # TODO(brews): Might be able to vectorize loop below.
     y = np.empty((nd, n_draws))
     y[:] = np.nan
     for i in range(n_draws):

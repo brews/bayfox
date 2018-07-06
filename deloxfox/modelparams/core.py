@@ -1,6 +1,12 @@
+from os import path
 from io import BytesIO
 from pkgutil import get_data
 import numpy as np
+
+
+POOLEDANNTRACE_PATH = path.join('modelparams', 'tracedumps', 'annual_pooled_trace.csv')
+HIERANNTRACE_PATH = path.join('modelparams', 'tracedumps', 'annual_hierarchical_trace.csv')
+HIERSEASTRACE_PATH = path.join('modelparams', 'tracedumps', 'seasonal_hierarchical_trace.csv')
 
 
 def get_csv_resource(resource, package='deloxfox'):
@@ -43,7 +49,7 @@ class HierTrace(McmcTrace):
 
     @property
     def forams(self):
-        return self._forams
+        return list(self._forams)
 
     def grab(self, param, foram):
         """Return array copy of MCMC trace parameter for a foraminifera.
@@ -54,7 +60,8 @@ class HierTrace(McmcTrace):
         except ValueError:
             if any([x.find('{}__'.format(param)) != -1 for x in list(self._trace.dtype.names)]):
                 # Likely bad foram name...
-                raise ForamError('Bad `foram` arg: {}\nPossible `foram` are: {}'.format(foram, self.forams))
+                msg_template = 'Bad `foram` arg: {}\nPossible `foram` are: {}'
+                raise ForamError(msg_template.format(foram, self.forams))
             else:
                 raise
 
@@ -68,7 +75,7 @@ class ForamError(Exception):
 
 class DrawDispenser:
     def __init__(self, pooled_annual=None, hier_annual=None, hier_seasonal=None):
-        """Handles and passes out MCMC trace model parameter draws.
+        """Handles and passes out MCMC trace draws.
 
         Parameters
         ----------
@@ -102,7 +109,7 @@ class DrawDispenser:
         return alpha, beta, tau
 
 
-# Preloading these resources so only need to load them once.
-get_draws = DrawDispenser(pooled_annual=PooledTrace(get_csv_resource('/modelparams/tracedumps/annual_pooled_trace.csv')),
-                          hier_annual=HierTrace(get_csv_resource('/modelparams/tracedumps/annual_hierarchical_trace.csv')),
-                          hier_seasonal=HierTrace(get_csv_resource('/modelparams/tracedumps/seasonal_hierarchical_trace.csv')))
+# Preloading these resources so only need to load once on deloxfox import.
+get_draws = DrawDispenser(pooled_annual=PooledTrace(get_csv_resource(POOLEDANNTRACE_PATH)),
+                          hier_annual=HierTrace(get_csv_resource(HIERANNTRACE_PATH)),
+                          hier_seasonal=HierTrace(get_csv_resource(HIERSEASTRACE_PATH)))
