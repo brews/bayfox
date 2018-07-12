@@ -1,6 +1,7 @@
 # deloxfox v0.0.1a1
 
 * Foram 'N_pachyderma_dextral' is now 'N_incompta'.
+* Fixed bug in `predictplot()` caused by bad default argument.
 
 
 # deloxfox v0.0.1a0

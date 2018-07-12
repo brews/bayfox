@@ -31,9 +31,10 @@ def predictplot(prediction, q=None, ylabel=None, x=None, xlabel=None, ax=None):
     if x is None:
         x = list(range(len(prediction.ensemble)))
 
-    q = list(q)
-    q.sort()
-    assert len(q) == 3, '`q` requires three numbers.'
+    if q is not None:
+        q = list(q)
+        q.sort()
+        assert len(q) == 3, '`q` requires three numbers.'
 
     perc = prediction.percentile(q=q)
 
