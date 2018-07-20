@@ -1,3 +1,7 @@
+# bayfox v0.0.1a2
+
+* 
+
 # bayfox v0.0.1a1
 
 * Rename library from `deloxfox` to `bayfox`.
