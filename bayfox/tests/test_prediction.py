@@ -1,5 +1,5 @@
 import numpy as np
-from deloxfox.predict import Prediction
+from bayfox.predict import Prediction
 
 
 def test_prediction_precentile():

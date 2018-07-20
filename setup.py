@@ -5,7 +5,7 @@ def readme():
         return f.read()
 
 setup(
-    name='deloxfox',
+    name='bayfox',
     version='0.0.1a0',
     description='Experimental Bayesian planktic foraminifera calibration, for Python.',
     long_description=readme(),
@@ -14,7 +14,7 @@ setup(
 
     author='S. Brewster Malevich',
     author_email='malevich@email.arizona.edu',
-    url='https://github.com/brews/deloxfox',
+    url='https://github.com/brews/bayfox',
     # See https://pypi.python.org/pypi?%3Aaction=list_classifiers
     classifiers=[
         'Development Status :: 3 - Alpha',
@@ -37,5 +37,5 @@ setup(
 
     install_requires=['numpy', 'matplotlib', 'attrs'],
     tests_require=['pytest'],
-    package_data={'deloxfox': ['modelparams/tracedumps/*.csv', 'example_data/*.csv']}
+    package_data={'bayfox': ['modelparams/tracedumps/*.csv', 'example_data/*.csv']}
 )

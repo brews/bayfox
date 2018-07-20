@@ -9,7 +9,7 @@ HIERANNTRACE_PATH = path.join('modelparams', 'tracedumps', 'annual_hierarchical_
 HIERSEASTRACE_PATH = path.join('modelparams', 'tracedumps', 'seasonal_hierarchical_trace.csv')
 
 
-def get_csv_resource(resource, package='deloxfox'):
+def get_csv_resource(resource, package='bayfox'):
     """Read flat CSV files as package resources.
     """
     with BytesIO(get_data(package, resource)) as fl:
@@ -109,7 +109,7 @@ class DrawDispenser:
         return alpha, beta, tau
 
 
-# Preloading these resources so only need to load once on deloxfox import.
+# Preloading these resources so only need to load once on bayfox import.
 get_draws = DrawDispenser(pooled_annual=PooledTrace(get_csv_resource(POOLEDANNTRACE_PATH)),
                           hier_annual=HierTrace(get_csv_resource(HIERANNTRACE_PATH)),
                           hier_seasonal=HierTrace(get_csv_resource(HIERSEASTRACE_PATH)))

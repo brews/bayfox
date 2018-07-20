@@ -1,7 +1,7 @@
 import pytest
 import numpy as np
-import deloxfox as dfox
-from deloxfox.modelparams.core import DrawDispenser, McmcTrace
+import bayfox as bfox
+from bayfox.modelparams.core import DrawDispenser, McmcTrace
 
 
 class FakeTrace(McmcTrace):
@@ -42,5 +42,5 @@ def test_predict_seatemp(dispenser, kws, expected):
     """
     np.random.seed(123)
     get_draws = dispenser()
-    victim = dfox.predict_seatemp(drawsfun=get_draws, prior_mean=15, prior_std=20, **kws)
+    victim = bfox.predict_seatemp(drawsfun=get_draws, prior_mean=15, prior_std=20, **kws)
     np.testing.assert_allclose(victim.ensemble, expected, rtol=0, atol=1e-4)

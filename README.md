@@ -1,6 +1,6 @@
-# deloxfox
+# bayfox
 
-[![Travis-CI Build Status](https://travis-ci.org/brews/deloxfox.svg?branch=master)](https://travis-ci.org/brews/deloxfox)
+[![Travis-CI Build Status](https://travis-ci.org/brews/bayfox.svg?branch=master)](https://travis-ci.org/brews/bayfox)
 
 Experimental Bayesian planktic foraminifera calibration, for Python.
 
@@ -11,9 +11,9 @@ Experimental Bayesian planktic foraminifera calibration, for Python.
 First, load key packages and an example dataset:
 
     import numpy as np
-    import deloxfox as dfox
+    import bayfox as bfox
 
-    example_file = dfox.get_example_data('VM21-30.csv')
+    example_file = bfox.get_example_data('VM21-30.csv')
     d = np.genfromtxt(example_file, delimiter=',', names=True, missing_values='NA')
 
 This data (from [Koutavas and Joanides 2012](https://doi.org/10.1029/2012PA002378))
@@ -22,7 +22,7 @@ The core site is in the Eastern Equatorial Pacific.
 
 We can make a prediction of sea-surface temperature (SST) with `predict_seatemp()`:
 
-    prediction = dfox.predict_seatemp(d['d18O_ruber'], d18osw=0.239, prior_mean=24.9, prior_std=7.81)
+    prediction = bfox.predict_seatemp(d['d18O_ruber'], d18osw=0.239, prior_mean=24.9, prior_std=7.81)
 
 The values we're using for priors are roughly based on the range of SSTs we've seen for *G. ruber* (white) sediment 
 core in the modern period, though prior standard deviation is twice`d18osw` is twice the spread we see in the modern 
@@ -38,12 +38,12 @@ the 5%, 50% and 95% percentiles. You can also plot your prediction with `dfox.pr
 This uses the pooled Bayesian calibration model, which is calibrated on annual SSTs. We can consider foram-specific 
 variability with:
 
-    prediction = dfox.predict_seatemp(d['d18O_ruber'], d18osw=0.239, prior_mean=24.9, prior_std=7.81, 
+    prediction = bfox.predict_seatemp(d['d18O_ruber'], d18osw=0.239, prior_mean=24.9, prior_std=7.81, 
                                       foram='G_ruber_white')
 
 which uses our hierarchical model calibrated on annual SSTs. We can also estimate foram-specific seasonal effects with:
 
-    prediction = dfox.predict_seatemp(d['d18O_ruber'], d18osw=0.239, prior_mean=24.9, prior_std=7.81, 
+    prediction = bfox.predict_seatemp(d['d18O_ruber'], d18osw=0.239, prior_mean=24.9, prior_std=7.81, 
                                       foram='G_ruber_white', seasonal_seatemp=True)
 
 This uses our hierarchical model calibrated on seasonal SSTs. Be sure to specify the foraminifera if you use this option.
@@ -52,23 +52,18 @@ You can also predict δ18O for planktic calcite using similar options, using the
 
 ## Installation
 
-To install **deloxfox** with *pip*, run:
+To install **bayfox** with *conda*, run:
 
 
-    pip install deloxfox
-    
-To install **deloxfox** with *conda*, run:
+    conda install -c sbmalev bayfox
 
-
-    conda install -c sbmalev deloxfox
-
-**deloxfox** is not compatible with Python 2.
+**bayfox** is not compatible with Python 2.
 
 ## Support and development
 
-- Please feel free to report bugs and issues or view the source code on GitHub (https://github.com/brews/deloxfox).
+- Please feel free to report bugs and issues or view the source code on GitHub (https://github.com/brews/bayfox).
 
 
 ## License
 
-**deloxfox** is available under the Open Source GPLv3 (https://www.gnu.org/licenses).
+**bayfox** is available under the Open Source GPLv3 (https://www.gnu.org/licenses).

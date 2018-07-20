@@ -1,6 +1,6 @@
 import numpy as np
 import attr
-from deloxfox.modelparams import get_draws
+from bayfox.modelparams import get_draws
 
 
 @attr.s()

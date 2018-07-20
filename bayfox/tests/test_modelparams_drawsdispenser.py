@@ -1,6 +1,6 @@
 import pytest
 import numpy as np
-from deloxfox.modelparams.core import DrawDispenser, McmcTrace, get_draws, ForamError
+from bayfox.modelparams.core import DrawDispenser, McmcTrace, get_draws, ForamError
 
 
 class FakeTrace(McmcTrace):

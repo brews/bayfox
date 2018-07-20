@@ -16,4 +16,4 @@ def get_example_data(filename):
     BytesIO of the example file.
     """
     resource_str = os.path.join('example_data', filename)
-    return io.BytesIO(pkgutil.get_data('deloxfox', resource_str))
+    return io.BytesIO(pkgutil.get_data('bayfox', resource_str))
