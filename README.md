@@ -52,8 +52,12 @@ You can also predict δ18O for planktic calcite using similar options, using the
 
 ## Installation
 
-To install **bayfox** with *conda*, run:
+To install **bayfox** with *pip*, run:
 
+    pip install bayfox
+
+
+To install **bayfox** with *conda*, run:
 
     conda install -c sbmalev bayfox
 
