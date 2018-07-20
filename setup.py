@@ -6,7 +6,7 @@ def readme():
 
 setup(
     name='bayfox',
-    version='0.0.1a0',
+    version='0.0.1a1',
     description='Experimental Bayesian planktic foraminifera calibration, for Python.',
     long_description=readme(),
     long_description_content_type="text/markdown",
