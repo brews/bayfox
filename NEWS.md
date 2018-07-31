@@ -1,6 +1,6 @@
 # bayfox v0.0.1a2
 
-* 
+* Fix typo in README.
 
 # bayfox v0.0.1a1
 

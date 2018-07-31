@@ -33,7 +33,7 @@ this correction to δ18Oc series before the prediction. See the
 [`erebusfall` package](https://github.com/brews/erebusfall) for simple ice-volume correction in Python.
 
 To see actual numbers from the prediction, directly parse `prediction.ensemble` or use `prediction.percentile()` to get 
-the 5%, 50% and 95% percentiles. You can also plot your prediction with `dfox.predictplot(prediction)`.
+the 5%, 50% and 95% percentiles. You can also plot your prediction with `bfox.predictplot(prediction)`.
 
 This uses the pooled Bayesian calibration model, which is calibrated on annual SSTs. We can consider foram-specific 
 variability with:
