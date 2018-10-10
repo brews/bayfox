@@ -13,7 +13,8 @@ def get_csv_resource(resource, package='bayfox'):
     """Read flat CSV files as package resources.
     """
     with BytesIO(get_data(package, resource)) as fl:
-        data = np.genfromtxt(fl, delimiter=',', names=True)
+        data = np.genfromtxt(fl, delimiter=',', names=True, deletechars='',
+                             replace_space=' ')
     return data
 
 

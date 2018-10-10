@@ -47,9 +47,9 @@ def predict_d18oc(seatemp, d18osw, foram=None, seasonal_seatemp=False,
         n-length array or scalar of δ18O of seawater (‰; VSMOW). If not scalar,
         must be the same length as ``seatemp``.
     foram : str, optional
-        Foraminifera group name of ``d18oc`` sample. Can be 'G_ruber_pink',
-        'G_ruber_white', 'G_sacculifer', 'N_pachyderma_sinistral',
-        'G_bulloides', 'N_incompta' or ``None``. If ``None``, pooled
+        Foraminifera group name of ``d18oc`` sample. Can be 'G. ruber pink',
+        'G. ruber white', 'G. sacculifer', 'N. pachyderma sinistral',
+        'G. bulloides', 'N. incompta' or ``None``. If ``None``, pooled
         calibration model is used.
     seasonal_seatemp : bool, optional
         Indicates whether sea-surface temperature is annual or seasonal
@@ -102,9 +102,9 @@ def predict_seatemp(d18oc, d18osw, prior_mean, prior_std, foram=None,
     prior_std : scalar
         Prior standard deviation of sea-surface temperature (°C).
     foram : str, optional
-        Foraminifera group name of ``d18oc`` sample. Can be 'G_ruber_pink',
-        'G_ruber_white', 'G_sacculifer', 'N_pachyderma_sinistral',
-        'G_bulloides', 'N_incompta' or ``None``. If ``None, pooled
+        Foraminifera group name of ``d18oc`` sample. Can be 'G. ruber pink',
+        'G. ruber white', 'G. sacculifer', 'N. pachyderma sinistral',
+        'G. bulloides', 'N. incompta' or ``None``. If ``None``, pooled
         calibration model is used.
     seasonal_seatemp : bool, optional
         Indicates whether sea-surface temperature is annual or seasonal

@@ -4,9 +4,10 @@
 
 ### Enhancements
 
-* Updated MCMC trace parameters.
+* Can now use proper foram species and subspecies names without underscores 
+    (Issue #1). Now use "G. ruber white" instead of "G_ruber_white".
 
-### Bug fixes
+* Updated MCMC trace parameters.
 
 
 ## v0.0.1a0

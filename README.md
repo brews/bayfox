@@ -44,7 +44,7 @@ variability with:
 which uses our hierarchical model calibrated on annual SSTs. We can also estimate foram-specific seasonal effects with:
 
     prediction = bfox.predict_seatemp(d['d18O_ruber'], d18osw=0.239, prior_mean=24.9, prior_std=7.81, 
-                                      foram='G_ruber_white', seasonal_seatemp=True)
+                                      foram='G. ruber white', seasonal_seatemp=True)
 
 This uses our hierarchical model calibrated on seasonal SSTs. Be sure to specify the foraminifera if you use this option.
 
