@@ -4,6 +4,8 @@
 
 ### Enhancements
 
+* Updated MCMC trace parameters.
+
 ### Bug fixes
 
 
