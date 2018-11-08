@@ -2,6 +2,7 @@
 
 ## Enhancements
 
+* Vectorize `predict_d18oc`. Should speed things up.
 
 ## Bug fixes
 

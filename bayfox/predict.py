@@ -64,23 +64,17 @@ def predict_d18oc(seatemp, d18osw, foram=None, seasonal_seatemp=False,
         Model prediction estimating δ18O of planktic foraminiferal calcite
         (‰; VPDB).
     """
-    seatemp = np.asanyarray(seatemp)
-    d18osw = np.asanyarray(d18osw)
+    seatemp = np.atleast_1d(seatemp)
+    d18osw = np.atleast_1d(d18osw)
     seasonal_seatemp = bool(seasonal_seatemp)
 
     alpha, beta, tau = drawsfun(foram=foram, seasonal_seatemp=seasonal_seatemp)
 
-    n_draws = len(tau)
-
     # Unit adjustment.
     d18osw_adj = d18osw - 0.27
 
-    # TODO(brews): Might be able to vectorize loop below.
-    y = np.empty((len(seatemp), n_draws))
-    y[:] = np.nan
-    for i in range(n_draws):
-        mu = alpha[i] + seatemp * beta[i] + d18osw_adj
-        y[:, i] = np.random.normal(mu, tau[i])
+    mu = alpha + seatemp[:, np.newaxis] * beta + d18osw_adj[:, np.newaxis]
+    y = np.random.normal(mu, tau)
 
     return Prediction(ensemble=y)
 
