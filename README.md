@@ -39,7 +39,7 @@ This uses the pooled Bayesian calibration model, which is calibrated on annual S
 variability with:
 
     prediction = bfox.predict_seatemp(d['d18O_ruber'], d18osw=0.239, prior_mean=24.9, prior_std=7.81, 
-                                      foram='G_ruber_white')
+                                      foram='G. ruber white')
 
 which uses our hierarchical model calibrated on annual SSTs. We can also estimate foram-specific seasonal effects with:
 

@@ -2,7 +2,10 @@
 
 ## Enhancements
 
+
 ## Bug fixes
+
+* Several minor changes to documentation.
 
 
 # bayfox v0.0.1a2
