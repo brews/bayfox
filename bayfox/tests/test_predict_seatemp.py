@@ -32,10 +32,10 @@ def test_dispenser():
      np.array([[-3.767453, -1.148942]])),  # hier_seasonal, multiple parameter draws.
     (test_dispenser,
      {'d18oc': [-3.75, 0.0], 'd18osw': [0.0], 'foram': '1', 'seasonal_seatemp': True},
-     np.array([[-3.767453, -2.217492], [1.212773, -3.029373]])),  # hier_seasonal, multiple seatemps
+     np.array([[-3.767453, -1.148942], [0.144224, -3.029373]])),  # hier_seasonal, multiple seatemps
     (test_dispenser,
      {'d18oc': [-3.75, 0.0], 'd18osw': [0.0, 1.0], 'foram': '1', 'seasonal_seatemp': True},
-     np.array([[-3.767453, -2.217492], [0.71557 , -3.526576]])),  # hier_seasonal, multiple d18osw & seatemps
+     np.array([[-3.767453, -1.148942], [-0.35298, -3.526576]])),  # hier_seasonal, multiple d18osw & seatemps
 ])
 def test_predict_seatemp(dispenser, kws, expected):
     """Test predict_seatemp() under basic inputs.

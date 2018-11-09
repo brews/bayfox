@@ -79,6 +79,7 @@ def predict_d18oc(seatemp, d18osw, foram=None, seasonal_seatemp=False,
     return Prediction(ensemble=y)
 
 
+
 def predict_seatemp(d18oc, d18osw, prior_mean, prior_std, foram=None,
                     seasonal_seatemp=False, drawsfun=get_draws):
     """Predict sea-surface temperature given δ18O of calcite and seawater δ18O.
@@ -112,8 +113,8 @@ def predict_seatemp(d18oc, d18osw, prior_mean, prior_std, foram=None,
     prediction : Prediction
         Model prediction giving estimated sea-surface temperature (°C).
     """
-    d18oc = np.asanyarray(d18oc)
-    d18osw = np.asanyarray(d18osw)
+    d18oc = np.atleast_1d(d18oc)
+    d18osw = np.atleast_1d(d18osw)
     seasonal_seatemp = bool(seasonal_seatemp)
 
     alpha, beta, tau = drawsfun(foram=foram, seasonal_seatemp=seasonal_seatemp)
@@ -121,60 +122,15 @@ def predict_seatemp(d18oc, d18osw, prior_mean, prior_std, foram=None,
     # Unit adjustment.
     d18osw_adj = d18osw - 0.27
 
-    nd = len(d18oc)
-    n_draws = len(tau)
+    prior_mean = np.atleast_1d(prior_mean)
+    prior_inv_cov = np.atleast_1d(prior_std).astype(float) ** -2
 
-    pmu = np.ones(nd) * prior_mean
-    pinv_cov = np.eye(nd) * prior_std ** -2
+    precision = tau ** -2
+    post_inv_cov = prior_inv_cov[..., np.newaxis] + precision * beta ** 2
+    post_cov = 1 / post_inv_cov
+    mean_first_factor = ((prior_inv_cov * prior_mean)[:, np.newaxis] + precision
+                         * beta * ((d18oc - d18osw_adj)[:, np.newaxis] - alpha))
+    mean_full = post_cov * mean_first_factor
 
-    # TODO(brews): Might be able to vectorize loop below.
-    y = np.empty((nd, n_draws))
-    y[:] = np.nan
-    for i in range(n_draws):
-        y[:, i] = _target_timeseries_pred(d18osw_now=d18osw_adj, alpha_now=alpha[i],
-                                          beta_now=beta[i], tau_now=tau[i],
-                                          proxy_ts=d18oc, prior_mu=pmu,
-                                          prior_inv_cov=pinv_cov)
-
+    y = np.random.normal(loc=mean_full, scale=np.sqrt(post_cov))
     return Prediction(ensemble=y)
-
-
-def _target_timeseries_pred(d18osw_now, alpha_now, beta_now, tau_now, proxy_ts,
-                            prior_mu, prior_inv_cov):
-    """
-
-    Parameters
-    ----------
-    d18osw_now : scalar
-    alpha_now : scalar
-    beta_now : scalar
-    tau_now : float
-        Current value of the residual standard deviation.
-    proxy_ts : ndarray
-        Time series of the proxy. Assume no temporal structure for now, as
-        timing is not equal.
-    prior_mu : ndarray
-        Prior means for each element of the time series.
-    prior_inv_cov: ndarray
-        Inverse of the prior covariance matrix for the time series.
-
-    Returns
-    -------
-    Sample of target time series vector conditional on the rest.
-    """
-    # TODO(brews): Above docstring is based on original MATLAB. Needs cleanup.
-    n_ts = len(proxy_ts)
-
-    # Inverse posterior covariance matrix
-    precision = tau_now ** -2
-    post_inv_cov = prior_inv_cov + precision * beta_now ** 2 * np.eye(n_ts)
-
-    post_cov = np.linalg.inv(post_inv_cov)
-    # Get first factor for the mean
-    mean_first_factor = prior_inv_cov @ prior_mu + precision * beta_now * (proxy_ts - alpha_now - d18osw_now)
-    mean_full = mean_first_factor @ post_cov
-
-    timeseries_pred = np.random.normal(loc=mean_full,
-                                       scale=np.sqrt(post_cov.diagonal()))
-
-    return timeseries_pred
