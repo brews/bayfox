@@ -24,7 +24,7 @@ We can make a prediction of sea-surface temperature (SST) with `predict_seatemp(
 
     prediction = bfox.predict_seatemp(d['d18O_ruber'], d18osw=0.239, prior_mean=24.9, prior_std=7.81)
 
-The values we're using for priors are roughly based on the range of SSTs we've seen for *G. ruber* (white) sediment 
+The values we're using for priors are roughly based on the range of SSTs we've seen for *G. ruber* sediment 
 core in the modern period, though prior standard deviation is twice`d18osw` is twice the spread we see in the modern 
 record. δ18O for seawater (‰; VSMOW) during the modern record 
 ([LeGrande and Schmidt 2006](https://doi.org/10.1029/2006GL026011)). We'll assume it's constant -- for simplicity. 
@@ -39,12 +39,12 @@ This uses the pooled Bayesian calibration model, which is calibrated on annual S
 variability with:
 
     prediction = bfox.predict_seatemp(d['d18O_ruber'], d18osw=0.239, prior_mean=24.9, prior_std=7.81, 
-                                      foram='G. ruber white')
+                                      foram='G. ruber')
 
 which uses our hierarchical model calibrated on annual SSTs. We can also estimate foram-specific seasonal effects with:
 
     prediction = bfox.predict_seatemp(d['d18O_ruber'], d18osw=0.239, prior_mean=24.9, prior_std=7.81, 
-                                      foram='G. ruber white', seasonal_seatemp=True)
+                                      foram='G. ruber', seasonal_seatemp=True)
 
 This uses our hierarchical model calibrated on seasonal SSTs. Be sure to specify the foraminifera if you use this option.
 
