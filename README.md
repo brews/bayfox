@@ -26,8 +26,7 @@ We can make a prediction of sea-surface temperature (SST) with `predict_seatemp(
 
 The values we're using for priors are roughly based on the range of SSTs we've seen for *G. ruber* sediment 
 cores in the modern period, though the prior standard deviation is twice the spread in the modern 
-record. δ18O for seawater (‰; VSMOW) during the modern record 
-([LeGrande and Schmidt 2006](https://doi.org/10.1029/2006GL026011)). We'll assume it's constant -- for simplicity. 
+record. Let's use δ18O of modern seawater (‰; VSMOW) near the site ([LeGrande and Schmidt 2006](https://doi.org/10.1029/2006GL026011)). We'll assume it's constant -- for simplicity. 
 We're also not correcting these proxies for changes in global ice volume, so these numbers will be off. Ideally we'd make 
 this correction to δ18Oc series before the prediction. See the 
 [`erebusfall` package](https://github.com/brews/erebusfall) for simple ice-volume correction in Python.
