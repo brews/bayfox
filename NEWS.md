@@ -2,6 +2,11 @@
 
 ## Enhancements
 
+* Updated MCMC trace files.
+
+* Foram species rename. G. ruber white and pink is now just 'G. ruber'. N. pachyderma sinistral is now just 
+  'N. pachyderma'. G. sacculifer has been updated to 'T. sacculifer'.
+
 * Vectorize `predict_d18oc` & `predict_d18oc`. Should speed things up.
 
 ## Bug fixes
