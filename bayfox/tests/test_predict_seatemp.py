@@ -16,7 +16,6 @@ class FakeTrace(McmcTrace):
             return np.atleast_1d(self._d['{}_{}'.format(param, foram)])
 
 
-@pytest.fixture
 def test_dispenser():
     get_draws = DrawDispenser(pooled_annual=FakeTrace({'a': 1.0, 'b': 2.0, 'tau': 3.0}),
                               hier_seasonal=FakeTrace({'a_1': [1.0, 2.0], 'b_1': [2.0, 2.0], 'tau_1': [3.0, 3.0]}))
