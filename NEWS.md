@@ -2,6 +2,7 @@
 
 ## Enhancements
 
+* Clarify docstrings for `predict_d18oc` and `predict_seatemp`.
 
 ## Bug fixes
 
